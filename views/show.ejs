@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mongoose Store</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/store">Back to All Items</a> <br>
+      <a href="/store/<%= items._id %>/edit  "> Edit <%= items.name %></a>
+    </nav>
+    <h1><%=items.name %></h1> <br>
+    $<%= items.price%> <br>
+    <%= items.description%> <br>
+    <img src="<%= items.img %>"> <br>
+    <p>Quantity Remaining: <a id="clicks"><%= items.qty %> </a></p>
+     
+   //need to figure out how to get the button to hide if item added at zero qty
+<script>
+  let clicks= document.getElementById("clicks").innerText
+  function onClick(){
+    if(clicks >=2){
+    clicks -= 1;
+    document.getElementById("clicks").innerHTML = clicks
+    } else{
+      document.getElementById("clicks").innerText = "SOLD OUT"
+    let element = document.getElementById("buyButton");
+    element.setAttribute("hidden", "hidden");
+   }
+  }
+ 
+</script>
+<button type="button" id="buyButton" onClick="onClick()">BUY</button>
+
+ 
+  </body>
+</html>
+

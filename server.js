@@ -4,7 +4,10 @@ const app = express()
 const methodOverride = require("method-override")
 require('dotenv').config()
 
-mongoose.connect(process.env.DATABASE_URL)
+mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,  
+});
 
 const db=mongoose.connection;
 db.on('error', (err) => console.log(" mongo is not running - Error: " + err.message ));
@@ -13,8 +16,9 @@ db.on('disconnected', () => console.log("mongo disconnected"));
 
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"))
+app.use("/static", express.static("public"))
 
-const storeController = require("./controllers/store-items")
+const storeController = require("./controllers/storeItems")
 app.use("/store", storeController);
 
 const PORT = process.env.PORT || 3000;

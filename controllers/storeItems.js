@@ -3,6 +3,7 @@ const itemRouter = express.Router()
 const Items = require('../models/items')
 const itemsSeedData = require("../models/itemsSeed")
 
+//Seed Route -- DONE
 itemRouter.get('/seed', (req, res) => {
     Items.deleteMany({}, (err, deletedItems) => {
         Items.create(itemsSeedData, (err, data) => {
@@ -11,39 +12,40 @@ itemRouter.get('/seed', (req, res) => {
     });
 });
 
-//Index
+//Index -- DONE
 itemRouter.get('/', (req, res) => {
     Items.find({}, (err, allItems) => {
         res.render('index.ejs', {items: allItems});
     });
 });
 
-//New
+//New -- DONE
 itemRouter.get('/new', (req, res) => {
     res.render('new.ejs');
 });
-//Delete
+
+//Delete -- DONE
 itemRouter.delete("/:id", (req, res) => {
     Items.findByIdAndRemove(req.params.id, (err, data) => {
       res.redirect("/store")
     })
   })
 
-//Update
+//Update -- DONE
 itemRouter.put("/:id", (req, res) => {
     Items.findByIdAndUpdate(
       req.params.id,
       req.body,
-    //   {
-    //     new: true,
-    //   },
-      (error, updatedBook) => {
+      {
+        new: true,
+      },
+      (error, updatedItem) => {
         res.redirect(`/store/${req.params.id}`)
       }
     )
   })
 
-//Create
+//Create -- DONE
 itemRouter.post('/', (req, res) => {
     Items.create(req.body, (err, createdItem) => {
         if (err) {
@@ -54,7 +56,7 @@ itemRouter.post('/', (req, res) => {
     })
 });
 
-//Edit
+//Edit -- DONE
 itemRouter.get("/:id/edit", (req, res) => {
     Items.findById(req.params.id, (error, foundItem) => {
         res.render("edit.ejs", {
@@ -63,7 +65,7 @@ itemRouter.get("/:id/edit", (req, res) => {
     })
   })
 
-//Show
+//Show -- DONE
 
 itemRouter.get('/:id', (req, res) => {
     Items.findById(req.params.id, (err, items) => {
