@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book List</title>
-  </head>
+  <%- include("partials/head.ejs") %>
 
   <body>
     <h1>Edit <%= items.name %> </h1>
     <form action="/store/<%=items._id%>?_method=PUT" method="post">
+      <div class="form">
       Name: <input type="text" name="name" value="<%=items.name%>" /><br />
-      Description: <input type="text" name="description" value="<%=items.description%>" /><br />
-      Image: <input type="text" name="author" value="<%=items.img%>" /><br />
-      Price: <input type="text" name="price" value="<%=items.price%>" /><br />
+      </div>
+      <div class="form">
+      Description: <input class="desc" type="text" name="description" value="<%=items.description%>" /><br />
+      </div>
+      <div class="form">
+      Image: <input type="text" name="img" value="<%=items.img%>" /><br />
+      </div>
+      <div class="form">
+      Price: $ <input type="text" name="price" value="<%=items.price%>" /><br />
+      </div>
+      <div class="form">
       Quantity: <input type="text" name="qty" value="<%=items.qty%>" /><br />
-      
-      <input type="submit" value="Submit Changes" />
+      </div>
+      <input class="button" type="submit" value="Submit Changes" />
     </form>
   </body>
 </html>

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mongoose Store</title>
-  </head>
-  <body>
-    <nav>
-      <a href="/store">Back to All Items</a> <br>
+  <%- include("partials/head.ejs") %>
+  <body class="showbody">
+    <nav class="nav">
+      <a href="/store">Back to All Items</a> 
       <a href="/store/<%= items._id %>/edit  "> Edit <%= items.name %></a>
     </nav>
+
     <h1><%=items.name %></h1> <br>
+    <div class="show-page">
+    <div class="show">
     $<%= items.price%> <br>
     <%= items.description%> <br>
     <img src="<%= items.img %>"> <br>
     <p>Quantity Remaining: <a id="clicks"><%= items.qty %> </a></p>
-     
-   //need to figure out how to get the button to hide if item added at zero qty
+     </div>
+    </div>
+   <!-- need to figure out how to get the button to hide if item added at zero qty -->
+
 <script>
   let clicks= document.getElementById("clicks").innerText
   function onClick(){
@@ -32,9 +32,13 @@
   }
  
 </script>
-<button type="button" id="buyButton" onClick="onClick()">BUY</button>
+<div class="showbutton">
+<button class="button" type="button" id="buyButton" onClick="onClick()">BUY
+</button>
 
- 
+<form action="/store/<%= items.id %>?_method=DELETE" method="POST">
+  <input class="button" type="submit" value="DELETE" />
+ </div>
   </body>
 </html>
 
